@@ -19,8 +19,7 @@ jobs:
         python-version: '3.8'
     - name: Install Requirements
       run: |
-        pip install -r ./requirements.txt
-      working-directory: /
+        pip install -r requirements.txt
     - name: Run linting tests
       run: | 
         flake8 src/model/
