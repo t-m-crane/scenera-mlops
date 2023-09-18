@@ -23,7 +23,6 @@ jobs:
     - name: Run linting tests
       run: | 
         flake8 src/model/
-        - name: Run pytest
     - name: Run pytest
       uses: pavelzw/pytest-action@v2
       with:
