@@ -17,4 +17,4 @@ jobs:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: run job
       run: az ml job create --file job.yml --resource-group scenera-demo --workspace-name scenera-demo-ml
-      working-directory: ../src/
+      working-directory: src/
