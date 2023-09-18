@@ -1,0 +1,14 @@
+name: Manually trigger an Azure Machine Learning job
+
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    steps:
+    - name: echo something
+      run: echo "Will add code checks here in next challenge"
+      working-directory: src/
