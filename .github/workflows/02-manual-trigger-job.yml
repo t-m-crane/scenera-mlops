@@ -2,10 +2,12 @@ name: Manually trigger an Azure Machine Learning job
 
 on:
   workflow_dispatch:
-
+  push:
+    branches: [ main ]
 jobs:
   train:
     runs-on: ubuntu-latest
+    environment: development
     steps:
     - name: Check out repo
       uses: actions/checkout@main
@@ -15,6 +17,18 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
-    - name: run job
+    - name: run training job
       run: az ml job create --file job.yml --resource-group scenera-demo --workspace-name scenera-demo-ml
+      working-directory: src/
+  deploy:
+    needs: train
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}  
+    - name: run prod job
+      run: az ml job create --file prod-job.yml --resource-group scenera-demo --workspace-name scenera-demo-ml
       working-directory: src/

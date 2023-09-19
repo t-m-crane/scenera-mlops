@@ -11,4 +11,3 @@ jobs:
     steps:
     - name: echo something
       run: echo "Will add code checks here in next challenge"
-      working-directory: src/
