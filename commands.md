@@ -11,7 +11,7 @@
 
 ## add dataset to the azure ml workspace from your local file system
 
-```az ml data create --file dataset.yml --resource-group scenera-demo --workspace-name scenera-demo-ml```
+```az ml data create --file prod-dataset.yml --resource-group scenera-demo --workspace-name scenera-demo-ml```
 
 ## Create service principle
 ```bash

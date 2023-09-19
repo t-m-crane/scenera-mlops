@@ -8,7 +8,7 @@ command: >-
 inputs:
   training_data: 
     type: uri_folder 
-    path: azureml://datastores/workspaceblobstore/paths/LocalUpload/534e63694838be564a42c83cb065f8fd/data/
+    path: azureml://datastores/workspaceblobstore/paths/LocalUpload/ff469ba855467299203a8f860ea1bd33/data/
   reg_rate: 0.01
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
 compute: azureml:scenera-mlops-cluster
