@@ -3,3 +3,7 @@ https://learn.microsoft.com/en-us/azure/machine-learning/how-to-github-actions-m
 
 ## Jack is here
 https://blah.com
+
+## List of SKU for online endpoint
+
+```https://learn.microsoft.com/en-us/azure/machine-learning/reference-managed-online-endpoints-vm-sku-list?view=azureml-api-2```

@@ -1,10 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
-name: scenera-mlflow-deployment
-endpoint_name: scenera-endpoint
-model:
-  name: scenera-demo-model
-  version: 1
-  path: azureml://locations/eastus/workspaces/4a852c13-1d48-4969-80d1-c66647370ebd/models/scenera-demo-model/versions/1
-  model_format: mlflow
-instance_type: Standard_F2s_v2
+name: scenera-mlflow-deployment-3
+endpoint_name: scenera-mlflow-endpoint
+model: azureml:scenera-demo-ml-2:1
+instance_type: Standard_DS5_v2
 instance_count: 1

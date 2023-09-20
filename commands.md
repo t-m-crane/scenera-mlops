@@ -25,8 +25,24 @@ az ad sp create-for-rbac --name "SCENERA-SP" --role contributor \
 ```az ml model create --workspace-name scenera-demo-ml --name scenera-demo-model --version 1 --path azureml://jobs/jolly_turnip_zv1k0xm78f/outputs/artifacts/paths/model/```
 
 
+
 ## Create an endpoint 
 ```az ml online-endpoint create --name scenera-mlflow-endpoint --file create-endpoint.yml --resource-group scenera-demo --workspace-name scenera-demo-ml```
 
+## update an endpoint
+```az ml online-endpoint update --file create-endpoint.yml --resource-group scenera-demo --workspace-name scenera-demo-ml```
+
+
 ## Deploy the model
-```az ml online-deployment create --name scenera-mlflow-deployment --endpoint scenera-mlflow-endpoint --file deployment.yml --all-traffic```
+```az ml online-deployment create --name scenera-mlflow-deployment --endpoint scenera-mlflow-endpoint --file deployment.yml --all-traffic --resource-group scenera-demo --workspace-name scenera-demo-ml```
+
+
+## Delete deployment
+```az ml online-deployment delete --name scenera-mlflow-deployment --endpoint-name scenera-mlflow-endpoint --yes --resource-group scenera-demo --workspace-name scenera-demo-ml```
+
+
+
+## create new model v2
+```az ml model create --name scenera-demo-ml-2 --type mlflow_model --path azureml://jobs/jolly_turnip_zv1k0xm78f/outputs/artifacts/paths/model/ --workspace-name scenera-demo-ml
+
+```
