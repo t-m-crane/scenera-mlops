@@ -42,7 +42,7 @@ jobs:
         runId_value=${runId#* }
         echo "runId=$runId_value" >> "$GITHUB_OUTPUT"
       working-directory: src/      
-  job3:
+  register-model:
     runs-on: ubuntu-latest
     needs: train-prod
     steps:

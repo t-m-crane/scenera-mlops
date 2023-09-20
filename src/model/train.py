@@ -14,7 +14,6 @@ from sklearn.linear_model import LogisticRegression
 
 # define functions
 def main(args):
-    # TO DO: enable autologging
     mlflow.autolog()
 
     # read data
@@ -48,9 +47,6 @@ def get_csvs_df(path):
     if not csv_files:
         raise RuntimeError(f"No CSV files found in provided data path: {path}")
     return pd.concat((pd.read_csv(f) for f in csv_files), sort=False)
-
-
-# TO DO: add function to split data
 
 
 def train_model(reg_rate, X_train, X_test, y_train, y_test):
