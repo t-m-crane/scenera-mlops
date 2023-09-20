@@ -39,7 +39,7 @@ jobs:
       id: prod-job-step
       run: |
         MLrunId=$(az ml job create --file prod-job.yml --resource-group scenera-demo --workspace-name scenera-demo-ml --stream | grep RunId)
-        MLrunId_value=${MLrunId#* }
+        runId_value=${MLrunId#* }
         echo "this is the runID: $runId_value"
         echo "MLrunId=$runId_value" >> "$GITHUB_OUTPUT"
       working-directory: src/      
