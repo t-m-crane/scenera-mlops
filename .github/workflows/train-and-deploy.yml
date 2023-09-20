@@ -5,7 +5,7 @@ on:
   push:
     branches: [ main ]
 jobs:
-  train:
+  train-dev:
     runs-on: ubuntu-latest
     environment: development
     steps:
@@ -20,8 +20,8 @@ jobs:
     - name: run training job
       run: az ml job create --file job.yml --resource-group scenera-demo --workspace-name scenera-demo-ml --stream
       working-directory: src/
-  deploy:
-    needs: train
+  train-prod:
+    needs: train-dev
     runs-on: ubuntu-latest
     environment: production
     steps:
