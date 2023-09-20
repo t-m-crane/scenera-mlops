@@ -40,4 +40,4 @@ jobs:
     runs-on: ubuntu-latest
     needs: train-prod
     steps:
-        run: echo "Registering the model...."
+      run: echo "Registering the model...."
