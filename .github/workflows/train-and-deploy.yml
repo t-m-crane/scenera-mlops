@@ -38,8 +38,8 @@ jobs:
     - name: run prod job
       id: prod-job-step
       run: |
-        runId=$(az ml job create --file prod-job.yml --resource-group scenera-demo --workspace-name scenera-demo-ml --stream | grep RunId)
-        runId_value=${runId#* }
+        MLrunId=$(az ml job create --file prod-job.yml --resource-group scenera-demo --workspace-name scenera-demo-ml --stream | grep RunId)
+        MLrunId_value=${MLrunId#* }
         echo "this is the runID: $runId_value"
         echo "MLrunId=$runId_value" >> "$GITHUB_OUTPUT"
       working-directory: src/      
