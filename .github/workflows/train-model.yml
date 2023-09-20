@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     outputs:
-      runId: ${{ steps.prod-job-step.outputs.runId }}
+      MLrunId: ${{ steps.prod-job-step.outputs.MLrunId }}
     steps:
     - name: Check out repo
       uses: actions/checkout@main
@@ -38,14 +38,15 @@ jobs:
     - name: run prod job
       id: prod-job-step
       run: |
-        runId=$(az ml job create --file prod-job.yml --resource-group scenera-demo --workspace-name scenera-demo-ml --stream | grep RunId)
-        runId_value=${runId#* }
-        echo "runId=$runId_value" >> "$GITHUB_OUTPUT"
+        output=$(az ml job create --file prod-job.yml --resource-group scenera-demo --workspace-name scenera-demo-ml --stream | grep RunId)
+        runId_value=${output#* }
+        echo "this is the runID value: $runId_value"
+        echo "MLrunId=HARD_CODED_THING" >> "$GITHUB_OUTPUT"
       working-directory: src/      
   register-model:
     runs-on: ubuntu-latest
     needs: train-prod
     steps:
       - env:
-          RUNID: ${{needs.train-prod.outputs.runId}}
+          RUNID: ${{needs.train-prod.outputs.MLrunId}}
         run: echo "$RUNID"
