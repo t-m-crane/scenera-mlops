@@ -44,7 +44,7 @@ jobs:
       working-directory: src/      
   job3:
     runs-on: ubuntu-latest
-    needs: prod-job
+    needs: train-prod
     steps:
       - env:
           RUNID: ${{needs.train-prod.outputs.runId}}
