@@ -19,7 +19,7 @@ jobs:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: run training job
       #run: az ml job create --file job.yml --resource-group scenera-demo --workspace-name aml-scenera-demo-2 --stream
-      run: az ml job list
+      run: az ml job list --resource-group scenera-demo --workspace-name aml-scenera-demo-2
       working-directory: src/
   train-prod:
     needs: train-dev
