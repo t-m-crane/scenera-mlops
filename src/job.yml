@@ -14,5 +14,3 @@ environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
 compute: azureml:scenera-mlops-cluster-3
 experiment_name: Scenera
 description: Scenera Demo
-
-(x) No such file or directory: /home/runner/work/scenera-mlops/scenera-mlops/src/experimentation/data/diabetes-dev.csv
