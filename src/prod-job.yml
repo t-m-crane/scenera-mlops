@@ -11,6 +11,6 @@ inputs:
     path: azureml://datastores/workspaceblobstore/paths/LocalUpload/ff469ba855467299203a8f860ea1bd33/data/
   reg_rate: 0.01
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
-compute: azureml:scenera-mlops-cluster
+compute: azureml:scenera-mlops-cluster-3
 experiment_name: Scenera
 description: Scenera Demo
