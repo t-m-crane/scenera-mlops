@@ -46,15 +46,17 @@ def split_data(df):
 
 def get_csvs_df(args):
     credential = DefaultAzureCredential()
-    
+    account_name = "sascenerademo1"
+    container_name = "azureml-blobstore-58917fa8-4ce4-4aa9-9ab3-41674d42c12b"
+    blob_name = "LocalUpload/a5b05a17f213e8e12e54948a8e3d1dfa/data/diabetes-dev.csv"
     # https://<your-storage-account-name>.blob.core.windows.net/
-    storage_url = f"https://{args.account_name}.blob.core.windows.net/"
+    storage_url = f"https://{account_name}.blob.core.windows.net/"
 
     # Create the client object using the storage URL and the credential
     blob_client = BlobClient(
         storage_url,
-        container_name=args.container_name,
-        blob_name=args.blob_name,
+        container_name=container_name,
+        blob_name=blob_name,
         credential=credential,
     )
     # encoding param is necessary for readall() to return str, otherwise it returns bytes
@@ -67,23 +69,6 @@ def get_csvs_df(args):
    # if not csv_files:
    #     raise RuntimeError(f"No CSV files found in provided data path: {path}")
    # return pd.concat((pd.read_csv(f) for f in csv_files), sort=False)
-
-def download_blob_to_string(self, blob_service_client: BlobServiceClient, container_name):
-    blob_client = blob_service_client.get_blob_client(container=container_name, blob="sample-blob.txt")
-
-    # encoding param is necessary for readall() to return str, otherwise it returns bytes
-    downloader = blob_client.download_blob(max_concurrency=1, encoding='UTF-8')
-    blob_text = downloader.readall()
-    print(f"Blob contents: {blob_text}")
-
-def download_blob_to_stream(self, blob_service_client: BlobServiceClient, container_name):
-    blob_client = blob_service_client.get_blob_client(container=container_name, blob="sample-blob.txt")
-
-    # readinto() downloads the blob contents to a stream and returns the number of bytes read
-    stream = io.BytesIO()
-    num_bytes = blob_client.download_blob().readinto(stream)
-    print(f"Number of bytes: {num_bytes}")
-
 
 def train_model(reg_rate, X_train, X_test, y_train, y_test):
     # train model
