@@ -48,7 +48,7 @@ def get_csvs_df(args):
     credential = DefaultAzureCredential()
     account_name = "sascenerademo1"
     container_name = "azureml-blobstore-58917fa8-4ce4-4aa9-9ab3-41674d42c12b"
-    blob_name = "LocalUpload/a5b05a17f213e8e12e54948a8e3d1dfa/data/diabetes-dev.csv"
+    blob_name = "diabetes-dev.csv"
     # https://<your-storage-account-name>.blob.core.windows.net/
     storage_url = f"https://{account_name}.blob.core.windows.net/"
 
