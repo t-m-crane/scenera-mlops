@@ -1,5 +1,5 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
-display_name: scenera-job
+display_name: scenera-job-test2
 code: model
 command: >-
   python train.py
