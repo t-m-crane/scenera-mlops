@@ -18,8 +18,8 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: run training job
-      run: az ml job create --file job.yml --resource-group scenera-demo --workspace-name aml-scenera-demo-2 --stream
-      #run: az ml job list --resource-group scenera-demo --workspace-name aml-scenera-demo-2
+      run: az ml job create --file job.yml --resource-group scenera-demo --workspace-name aml-scenera-demo-4 --stream
+      #run: az ml job list --resource-group scenera-demo --workspace-name aml-scenera-demo-4
       working-directory: src/
   train-prod:
     needs: train-dev
@@ -35,7 +35,7 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}  
     - name: run prod job
-      run: az ml job create --file prod-job.yml --resource-group scenera-demo --workspace-name aml-scenera-demo-2 --stream
+      run: az ml job create --file prod-job.yml --resource-group scenera-demo --workspace-name aml-scenera-demo-4 --stream
       working-directory: src/      
   register-model:
     runs-on: ubuntu-latest
