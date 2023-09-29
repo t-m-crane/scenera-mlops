@@ -8,9 +8,9 @@ command: >-
 inputs:
   training_data: 
     type: uri_folder 
-    path: azureml://datastores/workspaceblobstore/paths/LocalUpload/ff469ba855467299203a8f860ea1bd33/data/
+    path: azureml://datastores/workspaceblobstore/paths/LocalUpload/386681db2f7cd59e8c96f5ee80b212db/data/
   reg_rate: 0.01
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
-compute: azureml:scenera-mlops-cluster-3
+compute: azureml:scenera-mlops-cluster-4
 experiment_name: Scenera
 description: Scenera Demo
