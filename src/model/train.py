@@ -18,7 +18,7 @@ from azure.storage.blob import BlobClient
 
 # define functions
 def main(args):
-    #mlflow.autolog()
+    mlflow.autolog()
 
     # read data
     #df = get_csvs_df(args.training_data)
