@@ -1,34 +1,31 @@
 # Import libraries
-
 import argparse
 #import glob
 #import os
 import mlflow
-
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-
 from sklearn.linear_model import LogisticRegression
 from azure.identity import DefaultAzureCredential
-
+from azure.keyvault.secrets import SecretClient
 # Import the client object from the SDK library
 from azure.storage.blob import BlobClient
-
 
 # define functions
 def main(args):
     mlflow.autolog()
-
+    credential = DefaultAzureCredential()
+    secret_client = SecretClient(vault_url="https://amlscenerademo0962769700.vault.azure.net/", credential=credential)
+    secret_client.set_secret("test","new secret value")
+    secret = secret_client.get_secret("test")
+    print(secret.value)
     # read data
     #df = get_csvs_df(args.training_data)
-
     # split data
     #X_train, X_test, y_train, y_test = split_data(df)
-
     # train model
     #train_model(args.reg_rate, X_train, X_test, y_train, y_test)
-
 
 def split_data(df):
     X, y = df[['Pregnancies',
@@ -43,7 +40,6 @@ def split_data(df):
     print(np.unique(y, return_counts=True))
     return train_test_split(X, y, test_size=0.30, random_state=0)
 
-
 def get_csvs_df(args):
     credential = DefaultAzureCredential()
     account_name = "sascenerademo1"
@@ -51,7 +47,6 @@ def get_csvs_df(args):
     blob_name = "diabetes-dev.csv"
     # https://<your-storage-account-name>.blob.core.windows.net/
     storage_url = f"https://{account_name}.blob.core.windows.net/"
-
     # Create the client object using the storage URL and the credential
     blob_client = BlobClient(
         storage_url,
@@ -69,41 +64,32 @@ def get_csvs_df(args):
    # if not csv_files:
    #     raise RuntimeError(f"No CSV files found in provided data path: {path}")
    # return pd.concat((pd.read_csv(f) for f in csv_files), sort=False)
-
 def train_model(reg_rate, X_train, X_test, y_train, y_test):
     # train model
     LogisticRegression(C=1/reg_rate, solver="liblinear").fit(X_train, y_train)
 
-
 def parse_args():
     # setup arg parser
     parser = argparse.ArgumentParser()
-
     # add arguments
     parser.add_argument("--training_data", dest='training_data',
                         type=str)
     parser.add_argument("--reg_rate", dest='reg_rate',
                         type=float, default=0.01)
-
     # parse args
     args = parser.parse_args()
-
     # return args
     return args
-
 
 # run script
 if __name__ == "__main__":
     # add space in logs
     print("\n\n")
     print("*" * 60)
-
     # parse args
     args = parse_args()
-
     # run main function
     main(args)
-
     # add space in logs
     print("*" * 60)
     print("\n\n")
