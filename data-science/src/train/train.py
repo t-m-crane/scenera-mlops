@@ -16,13 +16,6 @@ def main(computer_vision_resource_name, dataset_name):
 
     model = Model(model_name, train_params, eval_params)
     model = training_client.train_model(model)
-    save_model_name()
-    
-def save_model_name(model_name):
-    name = 'model_name'
-    value = model_name
-    with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
-        print(f'{name}={value}', file=fh)
 
 if __name__ == '__main__':
     import argparse
