@@ -14,7 +14,6 @@ def main(args):
     eval_params = EvaluationParameters(test_dataset_name=eval_dataset.name) if eval_dataset else None
     model = Model(model_name, train_params, eval_params)
     model = training_client.train_model(model)
-    print(f"model name from env var: {os.getenv('MODEL_NAME')}")
 
 def parse_args():
     # setup arg parser
@@ -26,7 +25,6 @@ def parse_args():
     parser.add_argument("--input_resource_name", type=str, help = "Name of the resource to be used for training")
     # parse args
     args = parser.parse_args()
-    print("args.input_resource_name: ", args.input_resource_name)
 
     # return args
     return args
