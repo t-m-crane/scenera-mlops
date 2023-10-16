@@ -17,7 +17,7 @@ jobs:
   train-vision-model:
     runs-on: ubuntu-latest
     outputs:
-      model_name: ${{ steps.generate_model_name.outputs.modelName }}
+      modelName: ${{ steps.generate_model_name.outputs.modelName }}
     steps:
       - name: generate model name
         id: generate_model_name
