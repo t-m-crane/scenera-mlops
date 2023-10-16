@@ -1,6 +1,5 @@
 from cognitive_service_vision_model_customization_python_samples import TrainingClient, Model, ModelKind, TrainingParameters, EvaluationParameters, ResourceType
 import os
-import uuid
 
 def main(computer_vision_resource_name, dataset_name, model_name):
     multi_service_endpoint = None
@@ -11,8 +10,7 @@ def main(computer_vision_resource_name, dataset_name, model_name):
 
     eval_dataset = None
     eval_params = EvaluationParameters(test_dataset_name=eval_dataset.name) if eval_dataset else None
-
-
+    print(f"model_name: {model_name}")
     model = Model(model_name, train_params, eval_params)
     model = training_client.train_model(model)
 

@@ -7,6 +7,7 @@ def main(resource_name, model_name):
 
     #TODO: Get key from keyvault
     training_client = TrainingClient(ResourceType.SINGLE_SERVICE_RESOURCE, resource_name, multi_service_endpoint, os.getenv('RESOURCE_KEY'))
+    print(f"model_name: {model_name}")
     model = training_client.wait_for_training_completion(model_name)
     with mlflow.start_run() as run:
         mlflow.log_param("model_name", model_name)
