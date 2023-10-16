@@ -67,5 +67,4 @@ jobs:
           INPUT_DATASET_NAME: ${{ github.event.inputs.datasetName }} 
           INPUT_RESOURCE_NAME: ${{ github.event.inputs.computerVisionResourceName }}  
         run: |
-          python data-science/src/track.py
-        working-directory: ./data-science/src/train
+          python data-science/src/train/track.py
