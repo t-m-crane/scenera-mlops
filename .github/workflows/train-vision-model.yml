@@ -1,5 +1,8 @@
 name: train vision model
 
+env: 
+  MODEL_NAME: $(uuidgen)
+
 on:
   workflow_dispatch:
     inputs:
@@ -17,9 +20,9 @@ jobs:
   train-vision-model:
     runs-on: ubuntu-latest
     steps:
-      - name: generate unique model name
+      - name: display model name
         run: |
-          echo "MODEL_NAME=$(uuidgen)" >> "$GITHUB_ENV"
+          echo "$MODEL_NAME"
 
       - name: checkout repo content
         uses: actions/checkout@v2 # checkout the repository content
