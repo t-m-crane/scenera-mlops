@@ -44,8 +44,8 @@ jobs:
           INPUT_RESOURCE_NAME: ${{ github.event.inputs.computerVisionResourceName }}
         run: |
           python train.py
-          working-directory: ./train_custom_model
-          
+          working-directory: /data-science/src/train
+
   log_model_metrics:
     needs: train-vision-model
     runs-on: ubuntu-latest
@@ -69,4 +69,4 @@ jobs:
           INPUT_RESOURCE_NAME: ${{ github.event.inputs.computerVisionResourceName }}  
         run: |
           python track.py
-        working-directory: ./data-science/src/train
+        working-directory: /data-science/src/train
