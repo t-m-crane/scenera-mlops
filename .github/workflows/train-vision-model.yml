@@ -41,9 +41,9 @@ jobs:
         env:
           RESOURCE_KEY: ${{secrets.RESOURCE_KEY}} 
         run: |
-          python data-science/src/train/train.py
-          --model_name ${{ steps.generate_model_name.outputs.modelName }}
-          --input_dataset_name ${{ github.event.inputs.datasetName }} 
+          python data-science/src/train/train.py \
+          --model_name ${{ steps.generate_model_name.outputs.modelName }} \
+          --input_dataset_name ${{ github.event.inputs.datasetName }} \
           --input_resource_name ${{ github.event.inputs.computerVisionResourceName }}
 
   log_model_metrics:
