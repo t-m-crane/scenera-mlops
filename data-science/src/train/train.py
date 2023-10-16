@@ -13,6 +13,7 @@ def main(computer_vision_resource_name, dataset_name, model_name):
     print(f"model_name: {model_name}")
     model = Model(model_name, train_params, eval_params)
     model = training_client.train_model(model)
+    print(f"model name from env var: {os.getenv('MODEL_NAME')}")
 
 if __name__ == '__main__':
     main(os.getenv("INPUT_RESOURCE_NAME"), os.getenv("INPUT_DATASET_NAME"), os.getenv("MODEL_NAME"))
