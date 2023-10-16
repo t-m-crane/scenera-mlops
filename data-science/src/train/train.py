@@ -2,8 +2,7 @@ from cognitive_service_vision_model_customization_python_samples import Training
 import os
 import uuid
 
-def main(computer_vision_resource_name, dataset_name):
-    model_name = str(uuid.uuid4())
+def main(computer_vision_resource_name, dataset_name, model_name):
     multi_service_endpoint = None
 
     #TODO: Get key from keyvault
@@ -18,11 +17,4 @@ def main(computer_vision_resource_name, dataset_name):
     model = training_client.train_model(model)
 
 if __name__ == '__main__':
-    import argparse
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--computer_vision_resource_name', required=True, help='The name of the computer vision resource')
-    parser.add_argument('--dataset_name', required=True, help='The name of the dataset')
-
-    args = parser.parse_args()
-    main(args.computer_vision_resource_name, args.dataset_name)
+    main(os.getenv("INPUT_RESOURCE_NAME"), os.getenv("INPUT_DATASET_NAME"), os.getenv("MODEL_NAME"))
