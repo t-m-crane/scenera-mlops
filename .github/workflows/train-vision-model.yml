@@ -40,11 +40,11 @@ jobs:
       - name: train vision model
         env:
           RESOURCE_KEY: ${{secrets.RESOURCE_KEY}} 
-          MODEL_NAME: ${{ steps.generate_model_name.outputs.modelName }}
-          INPUT_DATASET_NAME: ${{ github.event.inputs.datasetName }} 
-          INPUT_RESOURCE_NAME: ${{ github.event.inputs.computerVisionResourceName }}
         run: |
           python data-science/src/train/train.py
+          --model_name ${{ steps.generate_model_name.outputs.modelName }}
+          --input_dataset_name ${{ github.event.inputs.datasetName }} 
+          --input_resource_name ${{ github.event.inputs.computerVisionResourceName }}
 
   log_model_metrics:
     needs: train-vision-model
@@ -63,10 +63,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: get training model status
-        env:
-          RESOURCE_KEY: ${{secrets.RESOURCE_KEY}}
-          MODEL_NAME: ${{ needs.train-vision-model.outputs.modelName }}
-          INPUT_DATASET_NAME: ${{ github.event.inputs.datasetName }} 
-          INPUT_RESOURCE_NAME: ${{ github.event.inputs.computerVisionResourceName }}  
-        run: |
-          python data-science/src/train/track.py
+      env:
+        RESOURCE_KEY: ${{secrets.RESOURCE_KEY}} 
+      run: |
+        python data-science/src/train/track.py
+        --model_name ${{ steps.generate_model_name.outputs.modelName }}
+        --input_resource_name ${{ github.event.inputs.computerVisionResourceName }}

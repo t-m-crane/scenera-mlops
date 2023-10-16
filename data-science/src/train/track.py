@@ -1,13 +1,15 @@
+import argparse
 from cognitive_service_vision_model_customization_python_samples import TrainingClient, ResourceType
 import os
 import mlflow
 
-def main(resource_name, model_name):
+def main(args):
     multi_service_endpoint = None
+    model_name = args.model_name
 
     #TODO: Get key from keyvault
-    training_client = TrainingClient(ResourceType.SINGLE_SERVICE_RESOURCE, resource_name, multi_service_endpoint, os.getenv('RESOURCE_KEY'))
-    print(f"model_name: {model_name}")
+    training_client = TrainingClient(ResourceType.SINGLE_SERVICE_RESOURCE, args.input_resource_name, multi_service_endpoint, os.getenv('RESOURCE_KEY'))
+
     model = training_client.wait_for_training_completion(model_name)
     with mlflow.start_run() as run:
         mlflow.log_param("model_name", model_name)
@@ -21,6 +23,19 @@ def main(resource_name, model_name):
     print(f"Model {model.name} has been trained with status {model.status}, run id {run.info.run_id} and name {run.info.run_name}")
     
 
+def parse_args():
+    # setup arg parser
+    parser = argparse.ArgumentParser()
+
+    # add arguments
+    parser.add_argument("--model_name", type=str, help="Name of the model to be trained")
+    parser.add_argument("--input_resource_name", type=str, help = "Name of the resource to be used for training")
+    # parse args
+    args = parser.parse_args()
+
+    # return args
+    return args
+
 if __name__ == '__main__':
-    print(f"model name from env var: {os.getenv('MODEL_NAME')}")
-    main(os.getenv("INPUT_RESOURCE_NAME"), os.getenv("MODEL_NAME"))
+    args = parse_args()
+    main(args)
