@@ -19,9 +19,7 @@ def main(args):
         mlflow.log_metric("meanAveragePrecision30", model.model_performance["meanAveragePrecision30"])
         mlflow.log_metric("meanAveragePrecision50", model.model_performance["meanAveragePrecision50"])
         mlflow.log_metric("meanAveragePrecision75", model.model_performance["meanAveragePrecision75"])
-    mlflow.end_run()    
-    print(f"Model {model.name} has been trained with status {model.status}, run id {run.info.run_id} and name {run.info.run_name}")
-    
+    mlflow.end_run()      
 
 def parse_args():
     # setup arg parser

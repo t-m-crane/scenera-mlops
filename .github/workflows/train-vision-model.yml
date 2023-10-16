@@ -63,9 +63,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: get training model status
-      env:
-        RESOURCE_KEY: ${{secrets.RESOURCE_KEY}} 
-      run: |
-        python data-science/src/train/track.py
-        --model_name ${{ steps.generate_model_name.outputs.modelName }}
-        --input_resource_name ${{ github.event.inputs.computerVisionResourceName }}
+        env:
+          RESOURCE_KEY: ${{secrets.RESOURCE_KEY}} 
+        run: |
+          python data-science/src/train/track.py
+          --model_name ${{ needs.train-vision-model.outputs.modelName }}
+          --input_resource_name ${{ github.event.inputs.computerVisionResourceName }}
