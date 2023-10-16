@@ -8,14 +8,15 @@ on:
         required: true
         default: 'sample_data'
         type: string
-      computerVisionResourceName: 
-        description: 'Name of the Computer Vision resource in Azure'     
+      timeBudgetInHours: 
+        description: 'Time Budget in Hours for training'     
         required: true
-        default: 'cv-teresacrane-demo'
-        type: string
+        default: 1
+        type: number
 jobs:
   train-vision-model:
     runs-on: ubuntu-latest
+    environment: development
     outputs:
       modelName: ${{ steps.generate_model_name.outputs.modelName }}
     steps:
@@ -44,11 +45,13 @@ jobs:
           python data-science/src/train/train.py \
           --model_name ${{ steps.generate_model_name.outputs.modelName }} \
           --input_dataset_name ${{ github.event.inputs.datasetName }} \
-          --input_resource_name ${{ github.event.inputs.computerVisionResourceName }}
+          --input_resource_name $COMPUTER_VISION_RESOURCE_NAME \
+          --time_budget_in_hours ${{ github.event.inputs.timeBudgetInHours }}
 
   log_model_metrics:
     needs: train-vision-model
     runs-on: ubuntu-latest
+    environment: development
     steps:
       - name: checkout repo content
         uses: actions/checkout@v2
@@ -68,4 +71,4 @@ jobs:
         run: |
           python data-science/src/train/track.py \
           --model_name ${{ needs.train-vision-model.outputs.modelName }} \
-          --input_resource_name ${{ github.event.inputs.computerVisionResourceName }}
+          --input_resource_name $COMPUTER_VISION_RESOURCE_NAME 

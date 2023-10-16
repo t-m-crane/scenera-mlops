@@ -8,7 +8,7 @@ def main(args):
 
     #TODO: Get key from keyvault
     training_client = TrainingClient(ResourceType.SINGLE_SERVICE_RESOURCE, args.input_resource_name, multi_service_endpoint, os.getenv('RESOURCE_KEY'))
-    train_params = TrainingParameters(training_dataset_name=args.input_dataset_name, time_budget_in_hours=1, model_kind=ModelKind.GENERIC_OD)  # checkout ModelKind for all valid model kinds
+    train_params = TrainingParameters(training_dataset_name=args.input_dataset_name, time_budget_in_hours=args.time_budget_in_hours, model_kind=ModelKind.GENERIC_OD)  # checkout ModelKind for all valid model kinds
 
     eval_dataset = None
     eval_params = EvaluationParameters(test_dataset_name=eval_dataset.name) if eval_dataset else None
@@ -23,6 +23,7 @@ def parse_args():
     parser.add_argument("--model_name", type=str, help="Name of the model to be trained")
     parser.add_argument("--input_dataset_name", type=str, help="Name of the dataset to be used for training")
     parser.add_argument("--input_resource_name", type=str, help = "Name of the resource to be used for training")
+    parser.add_argument("--time_budget_in_hours", type=int, help = "Number of hours model can train for")
     # parse args
     args = parser.parse_args()
 
