@@ -1,20 +1,17 @@
 name: train vision model
 
-env:
-  MODEL_NAME: model
-
 on:
   workflow_dispatch:
     inputs:
       datasetName: 
         description: 'Name of dataset in Azure Custom Vision'     
         required: true
-        default: 'sceneradatasetv1'
+        default: 'sample_data'
         type: string
       computerVisionResourceName: 
         description: 'Name of the Computer Vision resource in Azure'     
         required: true
-        default: 'scenera-computervision-rnd-resource'
+        default: 'cv-teresacrane-demo'
         type: string
 jobs:
   train-vision-model:
