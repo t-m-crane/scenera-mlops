@@ -19,11 +19,13 @@ on:
 jobs:
   train-vision-model:
     runs-on: ubuntu-latest
+    outputs:
+      model_name: ${{ steps.generate_model_name.outputs.MODEL_NAME }}
     steps:
-      - name: display model name
+      - name: generate model name
         run: |
-          echo "$MODEL_NAME"
-
+          echo "MODEL_NAME=$(uuidgen)" >> "$GITHUB_OUTPUT"
+      
       - name: checkout repo content
         uses: actions/checkout@v2 # checkout the repository content
 
@@ -40,6 +42,7 @@ jobs:
       - name: train vision model
         env:
           RESOURCE_KEY: ${{secrets.RESOURCE_KEY}} 
+          MODEL_NAME: ${{ steps.generate_model_name.outputs.modelName }}
           INPUT_DATASET_NAME: ${{ github.event.inputs.datasetName }} 
           INPUT_RESOURCE_NAME: ${{ github.event.inputs.computerVisionResourceName }}
         run: |
@@ -64,6 +67,7 @@ jobs:
       - name: get training model status
         env:
           RESOURCE_KEY: ${{secrets.RESOURCE_KEY}}
+          MODEL_NAME: ${{ needs.train-vision-model.outputs.modelName }}
           INPUT_DATASET_NAME: ${{ github.event.inputs.datasetName }} 
           INPUT_RESOURCE_NAME: ${{ github.event.inputs.computerVisionResourceName }}  
         run: |
