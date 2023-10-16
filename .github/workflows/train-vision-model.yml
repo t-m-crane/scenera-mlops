@@ -1,8 +1,5 @@
 name: train vision model
 
-env: 
-  MODEL_NAME: $(uuidgen)
-
 on:
   workflow_dispatch:
     inputs:
@@ -23,6 +20,7 @@ jobs:
       model_name: ${{ steps.generate_model_name.outputs.MODEL_NAME }}
     steps:
       - name: generate model name
+        id: generate_model_name
         run: |
           echo "MODEL_NAME=$(uuidgen)" >> "$GITHUB_OUTPUT"
       
