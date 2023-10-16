@@ -26,6 +26,7 @@ def parse_args():
     parser.add_argument("--input_resource_name", type=str, help = "Name of the resource to be used for training")
     # parse args
     args = parser.parse_args()
+    print("args.input_resource_name: ", args.input_resource_name)
 
     # return args
     return args
