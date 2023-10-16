@@ -23,8 +23,8 @@ jobs:
       - name: generate unique model name
         id: generate_model_name
         run: |
-          echo "step 1 ${uuidgen}"
-          echo "MODEL_NAME=${uuidgen}" >> "$GITHUB_ENV"
+          echo "step 1 $(uuidgen)"
+          echo "MODEL_NAME=$(uuidgen)" >> "$GITHUB_ENV"
 
       - name: retrieve model name
         id: retrieve_model_name
