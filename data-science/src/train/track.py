@@ -22,4 +22,5 @@ def main(resource_name, model_name):
     
 
 if __name__ == '__main__':
+    print(f"model name from env var: {os.getenv('MODEL_NAME')}")
     main(os.getenv("INPUT_RESOURCE_NAME"), os.getenv("MODEL_NAME"))
