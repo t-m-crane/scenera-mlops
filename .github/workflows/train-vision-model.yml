@@ -29,7 +29,7 @@ jobs:
       - name: retrieve model name
         id: retrieve_model_name
         run: |
-          echo $MODEL_NAME
+          echo "${{ env.MODEL_NAME }}"
 
 #      - name: checkout repo content
 #        uses: actions/checkout@v2 # checkout the repository content
