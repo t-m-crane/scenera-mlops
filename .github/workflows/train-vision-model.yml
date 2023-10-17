@@ -6,7 +6,12 @@ on:
       datasetName: 
         description: 'Name of dataset in Azure Custom Vision'     
         required: true
-        default: 'sample_data'
+        default: 'sceneradatasetv1'
+        type: string
+      validationDatasetName: 
+        description: 'Name of dataset in Azure Custom Vision to be used for validation'     
+        required: false
+        default: 'None'
         type: string
       timeBudgetInHours: 
         description: 'Time Budget in Hours for training'     
@@ -24,7 +29,7 @@ jobs:
         id: generate_model_name
         run: |
           echo "modelName=$(uuidgen)" >> "$GITHUB_OUTPUT"
-      
+ 
       - name: checkout repo content
         uses: actions/checkout@v2 # checkout the repository content
 
@@ -45,8 +50,9 @@ jobs:
           python data-science/src/train/train.py \
           --model_name ${{ steps.generate_model_name.outputs.modelName }} \
           --input_dataset_name ${{ github.event.inputs.datasetName }} \
-          --input_resource_name $COMPUTER_VISION_RESOURCE_NAME \
-          --time_budget_in_hours ${{ github.event.inputs.timeBudgetInHours }}
+          --validation_dataset_name ${{ github.event.inputs.validationDatasetName }} \
+          --resource_name ${{ vars.COMPUTER_VISION_RESOURCE_NAME }} \
+          --time_budget_in_hours ${{ github.event.inputs.timeBudgetInHours }} \
 
   log_model_metrics:
     needs: train-vision-model
@@ -71,4 +77,5 @@ jobs:
         run: |
           python data-science/src/train/track.py \
           --model_name ${{ needs.train-vision-model.outputs.modelName }} \
-          --input_resource_name $COMPUTER_VISION_RESOURCE_NAME 
+          --resource_name ${{ vars.COMPUTER_VISION_RESOURCE_NAME }} \
+          --mlflow_tracking_uri ${{ vars.MLFLOW_TRACKING_URI }} \

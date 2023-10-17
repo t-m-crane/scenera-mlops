@@ -7,9 +7,9 @@ def main(args):
     multi_service_endpoint = None
     model_name = args.model_name
 
-    #TODO: Get key from keyvault
     training_client = TrainingClient(ResourceType.SINGLE_SERVICE_RESOURCE, args.input_resource_name, multi_service_endpoint, os.getenv('RESOURCE_KEY'))
 
+    mlflow.set_tracking_uri(args.mlflow_tracking_uri)
     model = training_client.wait_for_training_completion(model_name)
     with mlflow.start_run() as run:
         mlflow.log_param("model_name", model_name)
@@ -27,7 +27,8 @@ def parse_args():
 
     # add arguments
     parser.add_argument("--model_name", type=str, help="Name of the model to be trained")
-    parser.add_argument("--input_resource_name", type=str, help = "Name of the resource to be used for training")
+    parser.add_argument("--resource_name", type=str, help = "Name of the resource to be used for training")
+    parser.add_argument("--mlflow_tracking_uri", type=str, help = "MLFlow Tracking URI from Azure Machine Learning Workspace")
     # parse args
     args = parser.parse_args()
 
