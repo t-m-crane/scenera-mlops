@@ -6,7 +6,7 @@ on:
       datasetName: 
         description: 'Name of dataset in Azure Custom Vision'     
         required: true
-        default: 'sceneradatasetv1'
+        default: 'sample_data'
         type: string
       validationDatasetName: 
         description: 'Name of dataset in Azure Custom Vision to be used for validation'     
