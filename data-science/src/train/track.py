@@ -7,7 +7,7 @@ def main(args):
     multi_service_endpoint = None
     model_name = args.model_name
 
-    training_client = TrainingClient(ResourceType.SINGLE_SERVICE_RESOURCE, args.input_resource_name, multi_service_endpoint, os.getenv('RESOURCE_KEY'))
+    training_client = TrainingClient(ResourceType.SINGLE_SERVICE_RESOURCE, args.resource_name, multi_service_endpoint, os.getenv('RESOURCE_KEY'))
 
     mlflow.set_tracking_uri(args.mlflow_tracking_uri)
     model = training_client.wait_for_training_completion(model_name)
